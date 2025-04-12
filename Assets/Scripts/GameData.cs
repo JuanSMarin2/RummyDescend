@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,21 +8,14 @@ public class GameData : MonoBehaviour
     public Vector2 lastPlayerPosition;
     public string nextSceneName;
 
-    // Nueva lista para enemigos derrotados
+    // Enemigos derrotados
     public List<string> defeatedEnemies = new List<string>();
 
+    // Puertas abiertas
     public List<string> openedDoors = new List<string>();
 
-    public void RegisterOpenedDoor(string doorID)
-    {
-        if (!openedDoors.Contains(doorID))
-            openedDoors.Add(doorID);
-    }
-
-    public bool IsDoorOpened(string doorID)
-    {
-        return openedDoors.Contains(doorID);
-    }
+    // Nuevo: ID del último enemigo que activó el combate
+    public string lastEnemyID;
 
     private void Awake()
     {
@@ -37,12 +29,31 @@ public class GameData : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Llamar esto cuando derrotes a un enemigo
+    // Añadir enemigo derrotado
     public void RegisterDefeatedEnemy(string enemyID)
     {
         if (!defeatedEnemies.Contains(enemyID))
         {
             defeatedEnemies.Add(enemyID);
         }
+    }
+
+    // Comprobar si un enemigo ya fue derrotado
+    public bool IsEnemyDefeated(string enemyID)
+    {
+        return defeatedEnemies.Contains(enemyID);
+    }
+
+    // Añadir puerta abierta
+    public void RegisterOpenedDoor(string doorID)
+    {
+        if (!openedDoors.Contains(doorID))
+            openedDoors.Add(doorID);
+    }
+
+    // Comprobar si una puerta ya fue abierta
+    public bool IsDoorOpened(string doorID)
+    {
+        return openedDoors.Contains(doorID);
     }
 }

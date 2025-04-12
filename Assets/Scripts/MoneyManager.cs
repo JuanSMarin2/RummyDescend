@@ -8,7 +8,7 @@ public class MoneyManager : MonoBehaviour
    
         public int coins = 0;
 
-    [SerializeField] public TextMeshProUGUI m_CoinText;
+
 
     public static MoneyManager Instance { get; private set; }
 
@@ -48,9 +48,6 @@ public class MoneyManager : MonoBehaviour
 
     private void UpdateCoinText()
     {
-        if (m_CoinText != null)
-        {
-            m_CoinText.text = coins.ToString();
-        }
+
     }
 }

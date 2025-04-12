@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
 
 
 
-    [SerializeField] private GameObject UIKey;
+   
 
     [SerializeField] private int value = 1;
 
@@ -21,11 +21,7 @@ public class ItemManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.hasKey)
-            UIKey.gameObject.SetActive(true);
 
-        if (!GameManager.Instance.hasKey)
-            UIKey.gameObject.SetActive(false);
     }
 
 

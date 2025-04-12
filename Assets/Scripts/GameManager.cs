@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadLevel(string sceneName)
     {
+        faderPanel.SetActive(true);
+
         if (animator != null)
             animator.SetTrigger("End");
 
@@ -54,5 +56,9 @@ public class GameManager : MonoBehaviour
 
         if (animator != null)
             animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        faderPanel.SetActive(false);
     }
 }
