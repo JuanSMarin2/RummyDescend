@@ -32,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
         else
             direction = startInPositiveDirection ? Vector2.right : Vector2.left;
 
-        if (GameData.Instance.defeatedEnemies.Contains(gameObject.name))
+        if (GameData.Instance != null && GameData.Instance.defeatedEnemies.Contains(gameObject.name))
         {
             // Ya fue derrotado antes: desactivar sin soltar nada
             Disable();
@@ -70,6 +70,8 @@ public class EnemyMovement : MonoBehaviour
             GameData.Instance.lastEnemyID = gameObject.name;
             GameManager.Instance.ChangeScene("EnemyBattle");
             PlayerController.Instance.canMove = false;
+
+            OnDefeated();
 
            
 

@@ -1242,6 +1242,7 @@ MonoBehaviour:
   nextSceneName: 
   defeatedEnemies: []
   openedDoors: []
+  lastEnemyID: 
 --- !u!4 &931895884
 Transform:
   m_ObjectHideFlags: 0
@@ -2407,6 +2408,10 @@ PrefabInstance:
     - target: {fileID: 3607935177100626241, guid: 210a1406f8aabaf4f989767d49719f83, type: 3}
       propertyPath: m_FlipY
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253265754232848448, guid: 210a1406f8aabaf4f989767d49719f83, type: 3}
+      propertyPath: isWarden
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6253265754232848448, guid: 210a1406f8aabaf4f989767d49719f83, type: 3}
       propertyPath: startInPositiveDirection
