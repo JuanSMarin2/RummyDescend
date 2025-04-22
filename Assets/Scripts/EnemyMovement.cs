@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+
+    [SerializeField] private EnemyData enemyData;
+
     [SerializeField] private float speed = 2f;
     private float startSpeed = 2f;
 
@@ -62,12 +65,15 @@ public class EnemyMovement : MonoBehaviour
 
             speed = 0;
 
-            // Guardar posición del jugador y el ID del enemigo
+            // Guardar posicion del jugador y el ID del enemigo
             GameData.Instance.lastPlayerPosition = collision.transform.position;
             GameData.Instance.RegisterDefeatedEnemy(gameObject.name);
 
 
             GameData.Instance.lastEnemyID = gameObject.name;
+
+            GameData.Instance.lastEnemyData = enemyData;
+
             GameManager.Instance.ChangeScene("EnemyBattle");
             PlayerController.Instance.canMove = false;
 

@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour
 {
-    public static GameData Instance { get; private set; }
+
+
+public EnemyData lastEnemyData;    public static GameData Instance { get; private set; }
 
     public Vector2 lastPlayerPosition;
     public string nextSceneName;
@@ -14,7 +16,7 @@ public class GameData : MonoBehaviour
     // Puertas abiertas
     public List<string> openedDoors = new List<string>();
 
-    // Nuevo: ID del último enemigo que activó el combate
+    // Nuevo: ID del ï¿½ltimo enemigo que activï¿½ el combate
     public string lastEnemyID;
 
     private void Awake()
@@ -29,7 +31,7 @@ public class GameData : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Añadir enemigo derrotado
+    // Anadir enemigo derrotado
     public void RegisterDefeatedEnemy(string enemyID)
     {
         if (!defeatedEnemies.Contains(enemyID))
@@ -44,7 +46,7 @@ public class GameData : MonoBehaviour
         return defeatedEnemies.Contains(enemyID);
     }
 
-    // Añadir puerta abierta
+    // Anadir puerta abierta
     public void RegisterOpenedDoor(string doorID)
     {
         if (!openedDoors.Contains(doorID))

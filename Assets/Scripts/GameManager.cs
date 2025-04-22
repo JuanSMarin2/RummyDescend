@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public bool hasKey;
 
+    public int playerHealth = 50;
     
 
     public static GameManager Instance { get; private set; }
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         // Buscar todos los enemigos en la escena
         EnemyMovement[] enemiesInScene = FindObjectsOfType<EnemyMovement>();
 
-        // Recorrer todos los enemigos y desactivar los que estén en la lista de derrotados
+        // Recorrer todos los enemigos y desactivar los que estï¿½n en la lista de derrotados
         foreach (EnemyMovement enemy in enemiesInScene)
         {
             if (GameData.Instance.defeatedEnemies.Contains(enemy.gameObject.name))
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 
         yield return null; // Espera un frame por seguridad
 
-        // Aquí ocultamos los enemigos derrotados
+        // Aquï¿½ ocultamos los enemigos derrotados
         HideDefeatedEnemies();
 
         if (animator != null)

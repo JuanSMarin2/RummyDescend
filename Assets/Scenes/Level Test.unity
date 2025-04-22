@@ -1238,6 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa134ec45ddd214d992ba66facfe0a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastEnemyData: {fileID: 0}
   lastPlayerPosition: {x: 0, y: 0}
   nextSceneName: 
   defeatedEnemies: []
@@ -1669,6 +1670,7 @@ MonoBehaviour:
   animator: {fileID: 959125649}
   faderPanel: {fileID: 741781777}
   hasKey: 0
+  playerHealth: 50
 --- !u!4 &1295794354
 Transform:
   m_ObjectHideFlags: 0
@@ -3138,6 +3140,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6253265754232848448, guid: 210a1406f8aabaf4f989767d49719f83, type: 3}
+      propertyPath: enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d5145a350563c84a96c9e4ceb5a497d, type: 2}
     - target: {fileID: 7853138161080257028, guid: 210a1406f8aabaf4f989767d49719f83, type: 3}
       propertyPath: m_Name
       value: Enemy
