@@ -6,9 +6,18 @@ public class EnemyData : ScriptableObject
 {
     public string enemyName;
     public int health = 10;
+    public int maxHealth = 10;
 
     [Tooltip("Cada combinación representa un posible ataque del enemigo.")]
     public List<CardCombination> attackCombinations;
+
+    [Tooltip("Cartas en el inventario del enemigo.  Usadas para reflejar.")]
+    public List<Card> enemyInventory; // Nueva lista para el inventario del enemigo
+
+    public void ResetHealth()
+    {
+        health = maxHealth;
+    }
 }
 
 [System.Serializable]

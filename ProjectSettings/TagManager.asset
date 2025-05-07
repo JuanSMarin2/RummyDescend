@@ -9,6 +9,9 @@ TagManager:
   - Coin
   - Key
   - Door
+  - SpecialCardPickup
+  - Shop
+  - Flag
   layers:
   - Default
   - TransparentFX

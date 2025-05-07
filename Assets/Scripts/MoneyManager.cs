@@ -26,7 +26,7 @@ public class MoneyManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateCoinText();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,13 +41,17 @@ public class MoneyManager : MonoBehaviour
         
     }
 
+    public void RemoveCoins(int amount)
+    {
+        coins -= amount;
+  
+    }
+
+
     private void Update()
     {
-        UpdateCoinText();
+      
     }
 
-    private void UpdateCoinText()
-    {
 
-    }
 }

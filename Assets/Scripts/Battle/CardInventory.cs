@@ -6,6 +6,7 @@ public class CardInventory : MonoBehaviour
     public static CardInventory Instance { get; private set; }
 
     private const int MaxCards = 7;
+    public int maxCards { get { return MaxCards; } } // Hacer la capacidad máxima accesible
 
     public List<Card> cards = new List<Card>();
 
@@ -21,41 +22,37 @@ public class CardInventory : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void AddCard(Card cardToAdd)
+    {
+        if (cards.Count < MaxCards)
+        {
+            cards.Add(cardToAdd);
+            Debug.Log($"Added card: {cardToAdd}");
+        }
+        else
+        {
+            Debug.Log("Card inventory is full.");
+        }
+    }
+
     public void AddRandomCard()
     {
-        if (cards.Count >= MaxCards)
+        if (cards.Count < MaxCards)
         {
-            Debug.Log("Inventory full.");
-            return;
+            int randomNum = Random.Range(1, 11);
+            Suit randomSuit = (Suit)Random.Range(0, System.Enum.GetValues(typeof(Suit)).Length);
+            cards.Add(new Card(randomNum, randomSuit));
         }
-
-        int number = Random.Range(1, 11); // 1 to 10 inclusive
-        Suit suit = (Suit)Random.Range(0, System.Enum.GetValues(typeof(Suit)).Length);
-
-        Card newCard = new Card(number, suit);
-        cards.Add(newCard);
-
-        Debug.Log($"Added card: {number} of {suit}");
-
-
-        if(BattleManager.Instance.inventoryGenerated){
-
-            BattleManager.Instance.isPlayerTurn = false;
+        else
+        {
+            Debug.Log("Card inventory is full.");
         }
     }
 
-public void RemoveCard(Card cardToRemove)
-{
-    for (int i = 0; i < cards.Count; i++)
+    public void RemoveCard(Card cardToRemove)
     {
-        if (cards[i].suit == cardToRemove.suit && cards[i].number == cardToRemove.number)
-        {
-            cards.RemoveAt(i);
-            break;
-        }
+        cards.Remove(cardToRemove);
     }
-}
-
 
     public List<Card> GetCards()
     {

@@ -1,4 +1,4 @@
-public enum Suit { Hearts, Diamonds, Clubs, Spades }
+public enum Suit { Red, Pink, Green, White }
 
 [System.Serializable]
 public class Card

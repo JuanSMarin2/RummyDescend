@@ -1,29 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class SceneTransitioner : MonoBehaviour
 {
+    public static SceneTransitioner Instance { get; private set; }
 
-    [SerializeField] string sceneName;
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void LoadScene()
     {
-        
+     
+        string targetScene = GetSceneByLevel(CurrentLevel.Level);
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ChangeScene(targetScene);
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
+        }
     }
 
-   public void LoadScene()
+    private string GetSceneByLevel(int level)
     {
-
-      
-
-        GameManager.Instance.ChangeScene(sceneName);
+        switch (level)
+        {
+            case 0: return "MainMenu";
+            case 1: return "LVL1";
+            case 2: return "LVL2";
+            case 3: return "LVL3";
+            case 4: return "Credits";
+            default:
+                Debug.LogWarning($"Nivel {level} no configurado, cargando MainMenu");
+                return "MainMenu";
+        }
     }
 }

@@ -9,9 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Movement Test.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Level Test.unity
+    path: Assets/Scenes/LVL1.unity
     guid: ce24e2e6c8f2a77439b56a0ce1a5ebc3
   - enabled: 1
     path: Assets/Scenes/EnemyBattle.unity
     guid: 13903b10b5c3bf744b7730a1ca265302
+  - enabled: 1
+    path: Assets/Scenes/LVL2.unity
+    guid: 7b2d8f76fe8434f4099df09a57d382b5
+  - enabled: 1
+    path: Assets/Scenes/LVL3.unity
+    guid: 9f42592ae45213643b24dc00350df417
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9c2c14f346eb559479c8c525e9bb771f
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 084b6e2153a2b484f811d07c6b3e52ea
   m_configObjects: {}

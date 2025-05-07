@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: TestEnemy
   m_EditorClassIdentifier: 
   enemyName: TestEnemy
-  health: 10
+  health: 100
+  maxHealth: 100
   attackCombinations:
   - cards:
-    - number: 3
+    - number: 10
       suit: 2
   - cards:
     - number: 1
@@ -24,5 +25,39 @@ MonoBehaviour:
     - number: 2
       suit: 0
   - cards:
-    - number: 5
+    - number: 10
       suit: 3
+  - cards:
+    - number: 10
+      suit: 0
+  - cards:
+    - number: 2
+      suit: 0
+  - cards:
+    - number: 3
+      suit: 0
+  - cards:
+    - number: 4
+      suit: 0
+  - cards:
+    - number: 5
+      suit: 0
+  - cards:
+    - number: 6
+      suit: 0
+  - cards:
+    - number: 7
+      suit: 0
+  - cards:
+    - number: 8
+      suit: 0
+  - cards:
+    - number: 9
+      suit: 0
+  enemyInventory:
+  - number: 8
+    suit: 0
+  - number: 9
+    suit: 0
+  - number: 10
+    suit: 0
