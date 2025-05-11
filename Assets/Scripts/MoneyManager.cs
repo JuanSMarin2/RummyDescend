@@ -8,7 +8,7 @@ public class MoneyManager : MonoBehaviour
    
         public int coins = 0;
 
-    [SerializeField] public TextMeshProUGUI m_CoinText;
+
 
     public static MoneyManager Instance { get; private set; }
 
@@ -26,7 +26,7 @@ public class MoneyManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateCoinText();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,16 +41,17 @@ public class MoneyManager : MonoBehaviour
         
     }
 
-    private void Update()
+    public void RemoveCoins(int amount)
     {
-        UpdateCoinText();
+        coins -= amount;
+  
     }
 
-    private void UpdateCoinText()
+
+    private void Update()
     {
-        if (m_CoinText != null)
-        {
-            m_CoinText.text = coins.ToString();
-        }
+      
     }
+
+
 }

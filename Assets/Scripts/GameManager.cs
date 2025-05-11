@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public bool hasKey;
 
+    public int playerHealth = 50;
     
 
     public static GameManager Instance { get; private set; }
@@ -33,6 +34,22 @@ public class GameManager : MonoBehaviour
 
     }
 
+    private void HideDefeatedEnemies()
+    {
+        if (GameData.Instance == null) return;
+
+        // Buscar todos los enemigos en la escena
+        EnemyMovement[] enemiesInScene = FindObjectsOfType<EnemyMovement>();
+
+        // Recorrer todos los enemigos y desactivar los que est�n en la lista de derrotados
+        foreach (EnemyMovement enemy in enemiesInScene)
+        {
+            if (GameData.Instance.defeatedEnemies.Contains(enemy.gameObject.name))
+            {
+                enemy.gameObject.SetActive(false); // Desactivar enemigos derrotados
+            }
+        }
+    }
 
 
     public void ChangeScene(string sceneName)
@@ -43,16 +60,25 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadLevel(string sceneName)
     {
+        faderPanel.SetActive(true);
+
         if (animator != null)
             animator.SetTrigger("End");
 
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(sceneName);
 
         yield return null; // Espera un frame por seguridad
 
+        // Aqu� ocultamos los enemigos derrotados
+        HideDefeatedEnemies();
+
         if (animator != null)
             animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        faderPanel.SetActive(false);
     }
 }

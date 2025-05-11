@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,6 +18,12 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove;
 
+    [SerializeField] private TextMeshProUGUI playerHealthText;
+
+
+
+
+
     private Rigidbody2D rb;
 
 
@@ -33,6 +40,8 @@ public class PlayerController : MonoBehaviour
     }
         void Start()
     {
+       
+
         rb = GetComponent<Rigidbody2D>();  // Obtener el componente Rigidbody2D
 
         canMove = true;
@@ -54,7 +63,21 @@ public class PlayerController : MonoBehaviour
         touchingWallRight = false;
         touchingWallUp = false;
         touchingWallDown = false;
+
+        UpdatePlayerHealthText();
     }
+
+    public void UpdatePlayerHealthText()
+    {
+        if (playerHealthText != null)
+        {
+            playerHealthText.text = "Vida: " + GameManager.Instance.playerHealth;
+        }
+        else
+        {
+        }
+    }
+
 
     void OnCollisionStay2D(Collision2D collision)
     {
@@ -81,6 +104,8 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+
 
     void FixedUpdate()
     {

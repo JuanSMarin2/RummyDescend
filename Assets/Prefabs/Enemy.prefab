@@ -99,9 +99,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783a47190826d0e4d80e68eb2102010b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyData: {fileID: 0}
   speed: 3
   moveVertically: 1
   startInPositiveDirection: 1
+  keyPrefab: {fileID: 2151513423770883808, guid: c8e088b7afba58040b7539ab5a81486b, type: 3}
+  coinPrefab: {fileID: 7247288638224864217, guid: e1db456a257e969409c631edf2b1fa1f, type: 3}
+  specialCardPickupPrefab: {fileID: 7697021925394861106, guid: 0272be2fef878374396a638ddd3872eb, type: 3}
+  dropOffset: {x: 0.5, y: 0.5}
+  isWarden: 0
+  isBoss: 0
+  flagPrefab: {fileID: 5988536614916696906, guid: 4cf741e578d285a478381587b6b52855, type: 3}
 --- !u!61 &4767390976196003792
 BoxCollider2D:
   m_ObjectHideFlags: 0
