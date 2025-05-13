@@ -316,7 +316,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 62610c10cfbb70e4188e40fc2f1b812a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb8180d4054d02e42957e6b46a97102c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -385,7 +385,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 518505334}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 518505336}
   variables: []
   description: 
   stepPause: 0
@@ -431,7 +432,7 @@ MonoBehaviour:
   suppressAllAutoSelections: 0
 --- !u!114 &518505335
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -450,7 +451,7 @@ MonoBehaviour:
   sceneNameOLD: 
 --- !u!114 &518505336
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -462,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 5
   indentLevel: 0
-  storyText: Chao
+  storyText: 'Oh no hermano '
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -519,7 +520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 3
   indentLevel: 0
-  storyText: Hola 2
+  storyText: 'Alfin podre ir a mi lugar favorito '
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -576,7 +577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 1
   indentLevel: 0
-  storyText: Hola
+  storyText: "\xA1\xA1\xA1\xA1Una cueva!!!!       vamo"
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -676,7 +677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dbef26068246b734b9f42044e00ce941, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6215c48e274deb546ade3cb980e9d8c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -751,7 +752,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e8884f0ab4af00d4a9bde863427f46af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 05d5c4debd32af447bdee5391f2228d1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
