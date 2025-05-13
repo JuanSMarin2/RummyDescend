@@ -25,7 +25,7 @@ public class SceneRestorer : MonoBehaviour
                 {
                     EnemyMovement enemyScript = enemy.GetComponent<EnemyMovement>();
                     if (enemyScript != null)
-                        enemyScript.OnDefeated(); // o simplemente: enemy.SetActive(false);
+                        enemy.SetActive(false);
                 }
             }
         }
