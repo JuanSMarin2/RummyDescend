@@ -27,12 +27,9 @@ public class EnemyMovement : MonoBehaviour
         if (isBoss)
         {
             speed = 0;
-
             isWarden = false;
             return;
         }
-
-        
 
         direction = startInPositiveDirection ?
             (moveVertically ? Vector2.up : Vector2.right) :
@@ -61,6 +58,9 @@ public class EnemyMovement : MonoBehaviour
 
         if (collision.CompareTag("Player"))
         {
+            if (CurrentLevel.Level == 3 && isBoss)
+                GameManager.Instance.isFinalBoss = true;
+
             speed = 0;
             GameData.Instance.lastPlayerPosition = collision.transform.position;
             GameData.Instance.RegisterDefeatedEnemy(gameObject.name);
@@ -69,21 +69,21 @@ public class EnemyMovement : MonoBehaviour
             GameManager.Instance.ChangeScene("EnemyBattle");
             PlayerController.Instance.canMove = false;
             StartCoroutine(TimerToDefeat());
-
-
-           
         }
     }
 
     private void FlipDirection()
     {
         direction *= -1;
-        Vector3 scale = transform.localScale;
 
-        if (!moveVertically) scale.x *= -1;
-        else scale.y *= -1;
-
-        transform.localScale = scale;
+        // Solo flipear horizontalmente si el movimiento es horizontal
+        if (!moveVertically)
+        {
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+        }
+        // No hacer nada con la escala si el movimiento es vertical
     }
 
     public void OnDefeated()
@@ -123,7 +123,6 @@ public class EnemyMovement : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
     public void Disable()
     {
         gameObject.SetActive(false);
@@ -141,7 +140,5 @@ public class EnemyMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(0.9f);
         OnDefeated();
-
-
     }
 }

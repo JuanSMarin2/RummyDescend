@@ -20,12 +20,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI playerHealthText;
 
-
-
-
-
     private Rigidbody2D rb;
-
+    private SpriteRenderer spriteRenderer; // Referencia al SpriteRenderer
 
     private void Awake()
     {
@@ -36,27 +32,33 @@ public class PlayerController : MonoBehaviour
         }
 
         Instance = this;
-
     }
-        void Start()
-    {
-       
 
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();  // Obtener el componente Rigidbody2D
+        spriteRenderer = GetComponent<SpriteRenderer>(); // Obtener el componente SpriteRenderer
 
         canMove = true;
     }
 
     void Update()
     {
-        moveSpeed = canMove ? 5 : 0; 
+        moveSpeed = canMove ? 5 : 0;
 
+        // Obtener la entrada del jugador para moverlo
+        movement.x = Input.GetAxisRaw("Horizontal");  // A/D o flechas izquierda/derecha
+        movement.y = Input.GetAxisRaw("Vertical");    // W/S o flechas arriba/abajo
 
-            // Obtener la entrada del jugador para moverlo
-            movement.x = Input.GetAxisRaw("Horizontal");  // A/D o flechas izquierda/derecha
-            movement.y = Input.GetAxisRaw("Vertical");    // W/S o flechas arriba/abajo
-
-        
+        // Controlar el flip del sprite según la dirección horizontal
+        if (movement.x > 0) // Moviéndose a la derecha
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (movement.x < 0) // Moviéndose a la izquierda
+        {
+            spriteRenderer.flipX = true;
+        }
 
         // Detectar las paredes al hacer contacto con ellas
         touchingWallLeft = false;
@@ -71,13 +73,9 @@ public class PlayerController : MonoBehaviour
     {
         if (playerHealthText != null)
         {
-            playerHealthText.text = "Vida: " + GameManager.Instance.playerHealth;
-        }
-        else
-        {
+            playerHealthText.text = "Vida: " + GameManager.Instance.playerHealth +" / 50";
         }
     }
-
 
     void OnCollisionStay2D(Collision2D collision)
     {
@@ -105,16 +103,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
     void FixedUpdate()
     {
-
-
-            // Calcular la velocidad de movimiento
-            Vector2 moveDirection = movement.normalized;  // Normalizamos el movimiento para que el jugador se mueva a la misma velocidad en cualquier dirección
-
-       
+        // Calcular la velocidad de movimiento
+        Vector2 moveDirection = movement.normalized;  // Normalizamos el movimiento para que el jugador se mueva a la misma velocidad en cualquier dirección
 
         float moveAmountX = movement.x * moveSpeed;
         float moveAmountY = movement.y * moveSpeed;

@@ -13,6 +13,12 @@ public class ItemManager : MonoBehaviour
 
     private Coroutine feedbackCoroutine;
 
+    [SerializeField] private AudioClip keyPickupSound;
+    [SerializeField] private AudioClip coinPickupSound;
+    [SerializeField] private AudioClip cardPickupSound;
+    [SerializeField] private AudioSource audioSource; // Asigna un AudioSource en el Inspector
+
+
     public static ItemManager Instance { get; private set; }
 
     private void Awake()
@@ -37,6 +43,7 @@ public class ItemManager : MonoBehaviour
         {
             GameManager.Instance.hasKey = true;
             collision.gameObject.SetActive(false);
+            PlaySound(keyPickupSound);
         }
 
         if (collision.CompareTag("Coin"))
@@ -45,20 +52,19 @@ public class ItemManager : MonoBehaviour
             Destroy(collision.gameObject);
 
             // Mostrar feedback "+1" por 1 segundo
-            ShowFeedback("+1", 1f);
+            ShowFeedback("       +1", 1f);
+            PlaySound(coinPickupSound);
         }
 
         if (collision.CompareTag("SpecialCardPickup"))
         {
-            // Añadir carta especial y obtener su tipo
-            SpecialCardInventory.Instance.AddRandomSpecialCard();
-            SpecialCardType cardType = SpecialCardInventory.Instance.GetLatestCardType();
 
-            Destroy(collision.gameObject);
+            TryCollectSpecialCard(collision.gameObject);
+            PlaySound(cardPickupSound);
 
-            // Mostrar feedback con el tipo de carta por 2 segundos
-            ShowFeedback($"Conseguiste carta especial: {GetCardTypeName(cardType)}", 2f);
         }
+
+
 
         if (collision.CompareTag("Shop"))
         {
@@ -71,7 +77,31 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
 
+
+    private void TryCollectSpecialCard(GameObject card)
+    {
+        // Verificar si hay espacio en el inventario
+        if (SpecialCardInventory.Instance.HasSpace())
+        {
+            SpecialCardInventory.Instance.AddRandomSpecialCard();
+            SpecialCardType cardType = SpecialCardInventory.Instance.GetLatestCardType();
+            Destroy(card);
+            ShowFeedback($"Conseguiste: {GetCardTypeName(cardType)}", 2f);
+        }
+        else
+        {
+            ShowFeedback("Inventario de cartas lleno", 2f);
+
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Shop"))

@@ -2,18 +2,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 
 public class SeeInventoryInLevel : MonoBehaviour
 {
     public static SeeInventoryInLevel Instance { get; private set; }
 
+    [Header("Configuración General")]
+    [SerializeField] private GameObject inventoryPanel;
+
+
+    [Header("Cartas Normales")]
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private Transform cardContainer;
+    [SerializeField] private Transform normalCardsContainer;
 
-    [SerializeField] private GameObject CardInventoryPanel;
+    [Header("Cartas Especiales")]
+    [SerializeField] private GameObject specialCardPrefab;
+    [SerializeField] private Transform specialCardsContainer;
+    [SerializeField] private Sprite[] specialCardSprites;
 
-    private List<GameObject> cardVisuals = new List<GameObject>();
+    private List<GameObject> normalCardVisuals = new List<GameObject>();
+    private List<GameObject> specialCardVisuals = new List<GameObject>();
 
     private void Awake()
     {
@@ -27,45 +35,105 @@ public class SeeInventoryInLevel : MonoBehaviour
 
     private void Start()
     {
-        CardInventoryPanel.SetActive(false);
+        inventoryPanel.SetActive(false);
+     
     }
 
-    public void RefreshUI()
+
+    public void Activate()
     {
-        ClearUI();
+        RefreshAllCards();
+        inventoryPanel.SetActive(true);
+       
+    }
+
+    public void Deactivate()
+    {
+        inventoryPanel.SetActive(false);
+    }
+
+
+    public void ToggleInventory()
+    {
+  
+        bool isActive = !inventoryPanel.activeSelf;
+        inventoryPanel.SetActive(isActive);
+
+        if (isActive)
+        {
+            RefreshAllCards();
+        }
+    }
+
+    public void RefreshAllCards()
+    {
+        RefreshNormalCards();
+        RefreshSpecialCards();
+    }
+
+    public void RefreshNormalCards()
+    {
+        ClearCardVisuals(normalCardVisuals);
 
         foreach (Card card in CardInventory.Instance.GetCards())
         {
-            CreateCardVisual(card);
+            CreateNormalCardVisual(card);
         }
     }
 
-    private void ClearUI()
+    public void RefreshSpecialCards()
     {
-        foreach (GameObject visual in cardVisuals)
+        ClearCardVisuals(specialCardVisuals);
+
+        foreach (SpecialCard card in SpecialCardInventory.Instance.GetCards())
         {
-            Destroy(visual);
+            CreateSpecialCardVisual(card);
         }
-        cardVisuals.Clear();
     }
 
-    private void CreateCardVisual(Card card)
+    private void CreateNormalCardVisual(Card card)
     {
-        GameObject newCardGO = Instantiate(cardPrefab, cardContainer);
+        GameObject cardObj = Instantiate(cardPrefab, normalCardsContainer);
 
-        // Asignar número visual
-        TextMeshProUGUI numberText = newCardGO.transform.Find("NumberText").GetComponent<TextMeshProUGUI>();
+        // Configurar visual
+        TextMeshProUGUI numberText = cardObj.transform.Find("NumberText").GetComponent<TextMeshProUGUI>();
         numberText.text = card.number.ToString();
 
-        // Asignar color
-        Image cardImage = newCardGO.GetComponent<Image>();
+        Image cardImage = cardObj.GetComponent<Image>();
         cardImage.color = GetColorBySuit(card.suit);
 
-        //  Aquí llamas a Setup con los datos correctos
-        CardButton cardButton = newCardGO.GetComponent<CardButton>();
-        cardButton.Setup(card, cardContainer); // Usamos el container como parent original
+        // Configurar interacción
+        CardButton cardButton = cardObj.GetComponent<CardButton>();
+        cardButton.Setup(card, normalCardsContainer);
 
-        cardVisuals.Add(newCardGO);
+        normalCardVisuals.Add(cardObj);
+    }
+
+    private void CreateSpecialCardVisual(SpecialCard card)
+    {
+        GameObject cardObj = Instantiate(specialCardPrefab, specialCardsContainer);
+
+        // Configurar visual
+        Image cardImage = cardObj.GetComponent<Image>();
+        cardImage.sprite = GetSpecialCardSprite(card.type);
+
+        TextMeshProUGUI nameText = cardObj.GetComponentInChildren<TextMeshProUGUI>();
+        nameText.text = FormatSpecialCardName(card.type);
+
+        // Configurar interacción
+        SpecialCardButton specialButton = cardObj.GetComponent<SpecialCardButton>();
+        specialButton.Setup(card, specialCardsContainer);
+
+        specialCardVisuals.Add(cardObj);
+    }
+
+    private void ClearCardVisuals(List<GameObject> visuals)
+    {
+        foreach (GameObject visual in visuals)
+        {
+            if (visual != null) Destroy(visual);
+        }
+        visuals.Clear();
     }
 
     private Color GetColorBySuit(Suit suit)
@@ -80,16 +148,23 @@ public class SeeInventoryInLevel : MonoBehaviour
         }
     }
 
-    public void OpenCardInventoryPanel()
+    private Sprite GetSpecialCardSprite(SpecialCardType type)
     {
-        RefreshUI();
-        CardInventoryPanel.SetActive(true);
+        int index = (int)type;
+        if (index >= 0 && index < specialCardSprites.Length)
+        {
+            return specialCardSprites[index];
+        }
+        return null;
     }
 
-
-    public void Back()
+    private string FormatSpecialCardName(SpecialCardType type)
     {
-        CardInventoryPanel.SetActive(false);
-
+        return type.ToString()
+            .Replace("Card", "")
+            .Replace("Wild", "W.")
+            .Replace("Protector", "Escudo")
+            .Replace("DoubleAttack", "Doble Ataque")
+            .Replace("Healer", "Cura");
     }
 }

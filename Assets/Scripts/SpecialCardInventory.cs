@@ -5,7 +5,7 @@ public class SpecialCardInventory : MonoBehaviour
 {
     public static SpecialCardInventory Instance { get; private set; }
 
-    public int MaxCards = 5; // Smaller capacity than regular cards
+    public int MaxCards = 7; // Smaller capacity than regular cards
     public List<SpecialCard> cards = new List<SpecialCard>();
 
 
@@ -88,6 +88,12 @@ public class SpecialCardInventory : MonoBehaviour
     {
         cards.Clear();
     }
+
+    public bool HasSpace()
+    {
+        return cards.Count < MaxCards; // Asegúrate de tener un maxCapacity definido
+    }
+
 
     public SpecialCardType GetLatestCardType()
     {

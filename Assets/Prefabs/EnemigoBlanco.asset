@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466bda26865cfbd43b8b9816fec095be, type: 3}
+  m_Name: EnemigoBlanco
+  m_EditorClassIdentifier: 
+  enemyName: EnemigoBlanco
+  health: 15
+  maxHealth: 15
+  attackCombinations:
+  - cards:
+    - number: 5
+      suit: 3
+  - cards:
+    - number: 2
+      suit: 3
+    - number: 3
+      suit: 3
+  - cards:
+    - number: 6
+      suit: 3
+    - number: 6
+      suit: 2
+  - cards:
+    - number: 2
+      suit: 3
+    - number: 3
+      suit: 3
+  enemyInventory:
+  - number: 2
+    suit: 3
+  - number: 3
+    suit: 3
+  - number: 5
+    suit: 3
+  - number: 6
+    suit: 3
+  - number: 6
+    suit: 0

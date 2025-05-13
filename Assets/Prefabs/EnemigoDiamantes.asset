@@ -27,3 +27,4 @@ MonoBehaviour:
       suit: 1
     - number: 3
       suit: 1
+  enemyInventory: []

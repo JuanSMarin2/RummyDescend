@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public bool hasKey;
 
+    public bool isFinalBoss;
+
     public int playerHealth = 50;
     
 
